@@ -1,0 +1,47 @@
+/*
+F1 = moveForward();
+F2 = turnLeft();
+F3 = turnAround();
+F4 = turnRight();
+F5 = pickBeeper();
+F6 = dropBeeper();
+*/
+
+void layAndRemoveTiles() {
+    layTilesAndReturn();
+}
+
+void layTilesAndReturn() {
+    if (!onBeeper()) {
+        layTileAndMoveForward();
+    }
+    else {
+        turnAroundAndReturn();
+    }
+}
+
+void layTileAndMoveForward() {
+    if (frontIsClear() && !beeperAhead()) {
+        dropBeeper();
+        moveForward();
+        layAndRemoveTiles();
+        pickBeeper();
+        if (frontIsClear()) {
+            moveForward();
+        }
+    }
+    else {
+        dropBeeper();
+        turnLeft();
+        moveForward();
+        layAndRemoveTiles();
+        pickBeeper();
+        turnRight();
+        moveForward();
+    }
+}
+
+void turnAroundAndReturn() {
+    turnAround();
+    moveForward();
+}

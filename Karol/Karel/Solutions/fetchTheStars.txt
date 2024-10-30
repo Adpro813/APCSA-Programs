@@ -1,0 +1,38 @@
+/*
+F1 = moveForward();
+F2 = turnLeft();
+F3 = turnAround();
+F4 = turnRight();
+F5 = pickBeeper();
+F6 = dropBeeper();
+*/
+
+void fetchTheStars()
+{
+    turnLeft();
+    repeat (9)
+    {
+        checkFront();
+        dropBeeper();
+        turnLeft();
+        moveForward();
+        turnLeft();
+    }
+    checkFront();
+    dropBeeper();
+    turnLeft();
+}
+void checkFront()
+{
+    if (onBeeper())
+    {
+        pickBeeper();
+        turnAround();
+    }
+    else
+    {
+        moveForward();
+        checkFront();
+        moveForward();
+    }
+}

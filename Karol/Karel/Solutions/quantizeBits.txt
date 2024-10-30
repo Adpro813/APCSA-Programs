@@ -1,0 +1,66 @@
+/*
+F1 = moveForward();
+F2 = turnLeft();
+F3 = turnAround();
+F4 = turnRight();
+F5 = pickBeeper();
+F6 = dropBeeper();
+*/
+
+void quantizeBits()
+{
+    fiveBeepers();
+    
+}
+void fiveBeepers()
+{
+    repeat(10) {
+        if(onBeeper()) 
+        {
+            turnLeft();
+            repeat(5)
+            {
+                moveForward(); 
+            }
+            if(onBeeper())
+            {
+                while(frontIsClear()) {
+                    moveForward();
+                    if(!onBeeper()) {
+                        dropBeeper();
+                        
+                    }
+                }
+                turnAround();
+                while(frontIsClear())
+                {
+                    moveForward();
+                    
+                }
+            }
+            else
+            {
+                turnAround();
+                while(frontIsClear())
+                {
+                    moveForward();
+                    if(onBeeper())
+                    {
+                        pickBeeper();
+                    }
+                }
+            }
+            turnLeft();
+            
+            
+        }
+        if(frontIsClear()) {
+            moveForward();
+            
+        }
+    }
+    
+    
+}
+
+

@@ -1,0 +1,48 @@
+/*
+F1 = moveForward();
+F2 = turnLeft();
+F3 = turnAround();
+F4 = turnRight();
+F5 = pickBeeper();
+F6 = dropBeeper();
+*/
+
+void mowTheLawn()
+{
+    leftTurn();
+    rightTurn();
+    leftTurn();
+    rightTurn();
+    leftTurn();
+    rightTurn();
+    
+}
+void leftTurn()
+{
+    
+    repeat(6)
+    {
+        moveForward();
+        pickBeeper();
+    }
+    turnLeft();
+    moveForward();
+    turnLeft();
+}
+void rightTurn()
+{
+    pickBeeper();
+    repeat(6)
+    {
+        moveForward();
+        if(onBeeper()) {
+            pickBeeper();
+            
+        }
+    }
+    turnRight();
+    moveForward();
+    turnRight();
+}
+
+
