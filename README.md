@@ -21,5 +21,5 @@ To run these programs, you’ll need to have the Java Development Kit (JDK) inst
    ```
    cd FirstAssignment
    javac *.java
-   Java FirstAssignment
+   java FirstAssignment
    ```
