@@ -1,19 +1,28 @@
+/**
+ * Represents a group of dice used in the Yahtzee game. This class provides
+ * methods to roll the dice, hold specific dice, retrieve the total value,
+ * and print a visual representation of the dice.
+ */
 public class DiceGroup {
     
-    private Dice[] die;	// the array of dice
-    
-    private final int NUM_DICE = 5;	// number of dice
+    private Dice[] die; // the array of dice
+    private final int NUM_DICE = 5; // number of dice
     
     // Create the seven different line images of a die
-    private String[] line = {	" _______ ",
-                                "|       |",
-                                "| O   O |",
-                                "|   O   |",
-                                "|     O |",
-                                "| O     |",
-                                "|_______|" };
+    private String[] line = { 
+        " _______ ",
+        "|       |",
+        "| O   O |",
+        "|   O   |",
+        "|     O |",
+        "| O     |",
+        "|_______|"
+    };
     
-    /*	Constructor initializes the array of Dice */
+    /**
+     * Initializes the array of Dice objects for the group, setting up the number of
+     * dice as specified by NUM_DICE.
+     */
     public DiceGroup() { 
         die = new Dice[NUM_DICE];
         for (int i = 0; i < NUM_DICE; i++) {
@@ -21,17 +30,21 @@ public class DiceGroup {
         }
     }
     
-    /**	Rolls all the dice */
+    /**
+     * Rolls all dice in the group.
+     */
     public void rollDice() { 
         for (int i = 0; i < die.length; i++) {
             die[i].roll();
         }
     }
     
-    /**	Hold the dice in the rawHold and roll the rest.
-     *	For example: If rawHold is "421", then hold die 1, 2, and 4, and
-     *	roll 3 and 5.
-     *	@param rawHold		the string of dice to hold
+    /**
+     * Rolls only the dice that are not specified to be held in the input string.
+     * For example, if rawHold is "421", then hold dice 1, 2, and 4, and
+     * roll dice 3 and 5.
+     *
+     * @param rawHold A string indicating the dice to hold by position
      */
     public void rollDice(String rawHold) { 
         boolean[] hold = new boolean[NUM_DICE];
@@ -51,7 +64,11 @@ public class DiceGroup {
         }
     }
     
-    /**	@return the total value of the DiceGroup */
+    /**
+     * Calculates and returns the total value of all dice in the group.
+     *
+     * @return The total sum of all dice values in the group
+     */
     public int getTotal() { 
         int total = 0;
         for (int i = 0; i < die.length; i++) {
@@ -60,13 +77,17 @@ public class DiceGroup {
         return total;
     }
     
-    /**	@return the array of Dice */
+    /**
+     * Returns the array of Dice objects in the group.
+     *
+     * @return The array of Dice in this DiceGroup
+     */
     public Dice[] getDice() {
         return die;
     }
     
     /**
-     *  Prints out the images of the dice
+     * Prints a visual representation of all dice in the group.
      */
     public void printDice() {
         printDiceHeaders();
@@ -82,7 +103,7 @@ public class DiceGroup {
     }
     
     /**
-     *  Prints the first line of the dice.
+     * Prints headers for the dice display, showing dice positions.
      */
     private void printDiceHeaders() {
         System.out.println();
@@ -93,18 +114,20 @@ public class DiceGroup {
     }
     
     /**
-     *  Prints one line of the ASCII image of the dice.
+     * Prints one line of the ASCII image of a die, corresponding to its current value.
      *
-     *  @param value The index into the ASCII image of the dice.
+     * @param value The index into the ASCII image lines array
      */
     private void printDiceLine(int value) {
         System.out.print(line[getDiceLine(value)]);
     }
-    
+	
     /**
-     *  Gets the index number into the ASCII image of the dice.
+     * Determines the appropriate index into the ASCII image lines for a die based on its
+     * value, returning the index for the corresponding visual representation.
      *
-     *  @param value The index into the ASCII image of the dice.
+     * @param value The calculated index for the dice ASCII representation
+     * @return The index in the line array corresponding to the value's visual line
      */
     private int getDiceLine(int value) {
         if (value < 7) return 0;
@@ -120,7 +143,7 @@ public class DiceGroup {
                 return 4;
             case 26: case 27:
                 return 5;
-            default:	// value > 30
+            default: // value > 30
                 return 6;
         }
     }
