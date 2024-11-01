@@ -10,6 +10,7 @@ import java.io.IOException;
  * @since 
  **/
 public class Yahtzee {	
+    private final int NUM_ROUNDS = 13; // number of rounds the players plays
 
     /**
      * The main method of the Yahtzee game. Initializes the game and starts it by
@@ -124,7 +125,7 @@ public class Yahtzee {
 
         printScoreCard(player1, player2);
 
-        for (int round = 1; round <= 13; round++) {
+        for (int round = 1; round <= NUM_ROUNDS; round++) {
             System.out.println("\nRound " + round + " of 13 rounds.");
             takeTurn(currentPlayer, player1, player2);
             YahtzeePlayer temp = currentPlayer;
