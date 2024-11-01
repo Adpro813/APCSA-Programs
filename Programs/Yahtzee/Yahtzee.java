@@ -1,7 +1,4 @@
 public class Yahtzee {	
-	public static final int ENTER_KEY = 10;
-	
-
 	public static void main(String[] args) 
 	{
 		Yahtzee yz = new Yahtzee();
@@ -28,17 +25,164 @@ public class Yahtzee {
 		System.out.println("|                                                                                    |");
 		System.out.println("| LET'S PLAY SOME YAHTZEE!                                                           |");
 		System.out.println("+------------------------------------------------------------------------------------+");
-		System.out.println("\n\n");
+		System.out.println();
 	}
 	public void run() {
-	 	String name1 = Prompt.getString("Player 1, please enter your first name ");
-		String name2 = Prompt.getString("Player 2, please enter your first name ");
-		char firstRoll = Prompt.getChar("Let's see who will go first, " + name1 + " please hit enter to roll the dice"); 
-
-		if(firstRoll == ENTER_KEY)
-		{
-			
-		}
+		String name1 = Prompt.getString("Player 1, please enter your first name");
+		String name2 = Prompt.getString("Player 2, please enter your first name");
 		
+		YahtzeePlayer player1 = new YahtzeePlayer();
+		player1.setName(name1);
+		
+		YahtzeePlayer player2 = new YahtzeePlayer();
+		player2.setName(name2);
+		
+		
+		System.out.print("Let's see who will go first. " + name1 + ", please hit enter to roll the dice");
+		Prompt.getString(""); // Wait for enter key
+
+		DiceGroup diceGroup1 = new DiceGroup();
+		diceGroup1.rollDice();
+		diceGroup1.printDice();
+		int total1 = diceGroup1.getTotal();
+		
+		System.out.print(name2 + ", it's your turn. Please hit enter to roll the dice");
+		Prompt.getString(""); // Wait for enter key
+
+		DiceGroup diceGroup2 = new DiceGroup();
+		diceGroup2.rollDice();
+		diceGroup2.printDice();
+		int total2 = diceGroup2.getTotal();
+		
+		System.out.println(name1 + ", you rolled a sum of " + total1 + ", and " + name2 + ", you rolled a sum of " + total2 + ".");
+
+		YahtzeePlayer currentPlayer;
+		YahtzeePlayer otherPlayer;
+
+		if (total1 > total2) {
+			System.out.println(name1 + ", since your sum was higher, you'll roll first.");
+			currentPlayer = player1;
+			otherPlayer = player2;
+		} else if (total2 > total1) {
+			System.out.println(name2 + ", since your sum was higher, you'll roll first.");
+			currentPlayer = player2;
+			otherPlayer = player1;
+		} else {
+			// Handle tie by rolling again
+			while (total1 == total2) {
+				System.out.println("It's a tie! Let's roll again.");
+				
+				System.out.print(name1 + ", please hit enter to roll the dice -> ");
+				Prompt.getString(""); // Wait for enter key
+				diceGroup1.rollDice();
+				diceGroup1.printDice();
+				total1 = diceGroup1.getTotal();
+				
+				System.out.print(name2 + ", it's your turn. Please hit enter to roll the dice -> ");
+				Prompt.getString(""); // Wait for enter key
+				diceGroup2.rollDice();
+				diceGroup2.printDice();
+				total2 = diceGroup2.getTotal();
+				
+				System.out.println(name1 + ", you rolled a sum of " + total1 + ", and " + name2 + ", you rolled a sum of " + total2 + ".");
+			}
+			if (total1 > total2) {
+				System.out.println(name1 + ", since your sum was higher, you'll roll first.");
+				currentPlayer = player1;
+				otherPlayer = player2;
+			} else {
+				System.out.println(name2 + ", since your sum was higher, you'll roll first.");
+				currentPlayer = player2;
+				otherPlayer = player1;
+			}
+		}
+
+		printScoreCard(player1, player2);
+		
+		for (int round = 1; round <= 13; round++) {
+			System.out.println("Round " + round + " of 13 rounds.");
+			takeTurn(currentPlayer, player1, player2);
+			YahtzeePlayer temp = currentPlayer;
+			currentPlayer = otherPlayer;
+			otherPlayer = temp;
+		}
+
+		System.out.println("\nFinal Scores:");
+		printScoreCard(player1, player2);
+
+		int totalScore1 = player1.getScoreCard().getTotalScore();
+		int totalScore2 = player2.getScoreCard().getTotalScore();
+
+		System.out.println(player1.getName() + "'s total score: " + totalScore1);
+		System.out.println(player2.getName() + "'s total score: " + totalScore2);
+
+		if (totalScore1 > totalScore2) {
+			System.out.println(player1.getName() + " wins!");
+		} else if (totalScore2 > totalScore1) {
+			System.out.println(player2.getName() + " wins!");
+		} else {
+			System.out.println("It's a tie!");
+		}
+	}
+
+	public void takeTurn(YahtzeePlayer player, YahtzeePlayer player1, YahtzeePlayer player2) {
+		System.out.print("\n" +player.getName() + ", it's your turn to play. Please hit enter to roll the dice");
+		Prompt.getString("");
+
+		DiceGroup dg = new DiceGroup();
+		int rolls = 0;
+		boolean endTurn = false;
+		while (rolls < 3 && !endTurn) {
+			if (rolls == 0) {
+				// First roll, roll all dice
+				dg.rollDice();
+			} else {
+				// Ask player which dice to hold
+				String holdPrompt = "Which di(c)e would you like to keep?  Enter the values you'd like to 'hold' without\n" +
+						"spaces.  For examples, if you'd like to 'hold' die 1, 2, and 5, enter 125\n" +
+						"(enter -1 if you'd like to end the turn)";
+				String hold = Prompt.getString(holdPrompt);
+				if (hold.equals("-1")) {
+					endTurn = true;
+					break;
+				}
+				dg.rollDice(hold);
+			}
+			dg.printDice();
+			rolls++;
+			if (rolls < 3 && !endTurn) {
+				String holdPrompt = "Which di(c)e would you like to keep?  Enter the values you'd like to 'hold' without\n" +
+						"spaces.  For examples, if you'd like to 'hold' die 1, 2, and 5, enter 125\n" +
+						"(enter -1 if you'd like to end the turn)";
+				String hold = Prompt.getString(holdPrompt);
+				if (hold.equals("-1")) {
+					endTurn = true;
+					break;
+				}
+				dg.rollDice(hold);
+				dg.printDice();
+			}
+		}
+
+		// After rolling, ask player to choose category to score
+		YahtzeeScoreCard scoreCard = player.getScoreCard();
+		printScoreCard(player1, player2);
+		String categoryPrompt = player.getName() + ", now you need to make a choice. Pick a valid integer from the list above";
+		int category = Prompt.getInt(categoryPrompt, 1, 13);
+		boolean success = scoreCard.changeScore(category, dg);
+		while (!success) {
+			System.out.println("That category is already used or invalid. Please choose another category.");
+			category = Prompt.getInt(categoryPrompt, 1, 13);
+			success = scoreCard.changeScore(category, dg);
+		}
+		printScoreCard(player1, player2);
+	}
+
+	public void printScoreCard(YahtzeePlayer player1, YahtzeePlayer player2) {
+		YahtzeeScoreCard sc1 = player1.getScoreCard();
+		YahtzeeScoreCard sc2 = player2.getScoreCard();
+		sc1.printCardHeader();
+		sc1.printPlayerScore(player1);
+		sc2.printPlayerScore(player2);
 	}
 }
