@@ -1,9 +1,13 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
 /**
  * This program is the entry point of the Yahtzee game, handling user input and
  * calling other classes to manage game logic, player turns, and scoring.
  * 
- * @author Aditya Dendukuri
- * @since 10/24/24
+ * @author 
+ * @since 
  **/
 public class Yahtzee {	
 
@@ -99,7 +103,7 @@ public class Yahtzee {
                 diceGroup1.printDice();
                 total1 = diceGroup1.getTotal();
 
-                System.out.print(name2 + ", it's your turn. Please hit enter to roll the dice -> ");
+                System.out.print(name2 + ", it's your turn. Please hit enter to roll the dice");
                 Prompt.getString(""); // Wait for enter key
                 diceGroup2.rollDice();
                 diceGroup2.printDice();
@@ -121,7 +125,7 @@ public class Yahtzee {
         printScoreCard(player1, player2);
 
         for (int round = 1; round <= 13; round++) {
-            System.out.println("Round " + round + " of 13 rounds.");
+            System.out.println("\nRound " + round + " of 13 rounds.");
             takeTurn(currentPlayer, player1, player2);
             YahtzeePlayer temp = currentPlayer;
             currentPlayer = otherPlayer;
@@ -133,13 +137,13 @@ public class Yahtzee {
         int totalScore1 = player1.getScoreCard().getTotalScore();
         int totalScore2 = player2.getScoreCard().getTotalScore();
 
-        System.out.println(player1.getName() +  "\tscore total = " + totalScore1);
+        System.out.println(player1.getName() + "\tscore total = " + totalScore1);
         System.out.println(player2.getName() + "\tscore total = " + totalScore2);
 
         if (totalScore1 > totalScore2) {
-            System.out.println(player1.getName() + " wins!");
+            System.out.println("Congratulations " + player1.getName() + ". YOU WON!!!");
         } else if (totalScore2 > totalScore1) {
-            System.out.println(player2.getName() + " wins!");
+            System.out.println("Congratulations " + player2.getName() + ". YOU WON!!!");
         } else {
             System.out.println("It's a tie!");
         }
@@ -150,7 +154,7 @@ public class Yahtzee {
      * dice rolls, offers choices to hold dice between rolls, and allows the player
      * to select a scoring category.
      *
-     * @param player The current player taking their turn
+     * @param player  The current player taking their turn
      * @param player1 The first player in the game
      * @param player2 The second player in the game
      */
@@ -188,12 +192,17 @@ public class Yahtzee {
                 }
                 dg.rollDice(hold);
                 dg.printDice();
+                rolls++;
             }
         }
 
         // After rolling, ask player to choose category to score
         YahtzeeScoreCard scoreCard = player.getScoreCard();
         printScoreCard(player1, player2);
+        
+        // **Add the numbering line here**
+        System.out.println("                      1    2    3    4    5    6    7    8    9   10   11   12   13");
+        
         String categoryPrompt = player.getName() + ", now you need to make a choice. Pick a valid integer from the list above";
         int category = Prompt.getInt(categoryPrompt, 1, 13);
         boolean success = scoreCard.changeScore(category, dg);
@@ -217,5 +226,6 @@ public class Yahtzee {
         sc1.printCardHeader();
         sc1.printPlayerScore(player1);
         sc2.printPlayerScore(player2);
+        
     }
 }
