@@ -200,8 +200,7 @@ public class Yahtzee {
         YahtzeeScoreCard scoreCard = player.getScoreCard();
         printScoreCard(player1, player2);
         
-        // **Add the numbering line here**
-        System.out.println("                      1    2    3    4    5    6    7    8    9   10   11   12   13");
+        System.out.println("                  1    2    3    4    5    6    7    8    9   10   11   12   13");
         
         String categoryPrompt = player.getName() + ", now you need to make a choice. Pick a valid integer from the list above";
         int category = Prompt.getInt(categoryPrompt, 1, 13);
