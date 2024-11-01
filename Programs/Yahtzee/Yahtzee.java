@@ -93,7 +93,7 @@ public class Yahtzee {
             while (total1 == total2) {
                 System.out.println("It's a tie! Let's roll again.");
 
-                System.out.print(name1 + ", please hit enter to roll the dice -> ");
+                System.out.print(name1 + ", please hit enter to roll the dice");
                 Prompt.getString(""); // Wait for enter key
                 diceGroup1.rollDice();
                 diceGroup1.printDice();
