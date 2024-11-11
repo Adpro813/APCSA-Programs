@@ -1,0 +1,105 @@
+Alice
+Bob
+
+
+
+
+
+
+Betty
+
+125
+3
+5
+
+Alice
+
+23
+1
+
+Betty
+
+4
+7
+
+Alice
+
+2
+5
+
+Betty
+
+245
+8
+
+Alice
+
+15
+2
+
+Betty
+
+1245
+10
+
+Alice
+
+35
+3
+
+Betty
+
+2345
+13
+
+Alice
+
+123
+4
+
+Betty
+
+125
+6
+
+Alice
+
+24
+9
+
+Betty
+
+345
+12
+Alice
+Bob
+
+
+
+# Round 1 - Alice's Turn
+# (1) Press Enter to roll
+# (2) Hold dice 1, 2, and 5
+125
+3
+
+# Round 1 - Bob's Turn
+# (1) Press Enter to roll
+# (2) Hold dice 2 and 4
+24
+5
+
+# Round 2 - Alice's Turn
+# (1) Press Enter to roll
+# (2) Hold dice 1 and 3
+13
+2
+
+# Round 2 - Bob's Turn
+# (1) Press Enter to roll
+# (2) Hold all dice
+12345
+1
+
+...
+
+# Continue similarly for Rounds 3 to 13
