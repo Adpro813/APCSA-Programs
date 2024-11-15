@@ -1,0 +1,74 @@
+
+<html><body>
+
+  [token 0]: <html> [token 1]: <body> 
+
+<h1>Special tokenizing</h1>
+
+  [token 0]: <h1> [token 1]: Special [token 2]: tokenizing [token 3]: </h1> 
+
+Some pre-formatted text; most likely code that needs no formatting.
+
+  [token 0]: Some [token 1]: pre-formatted [token 2]: text [token 3]: ; [token 4]: most 
+  [token 5]: likely [token 6]: code [token 7]: that [token 8]: needs [token 9]: no 
+  [token 10]: formatting [token 11]: . 
+
+<pre>
+
+  [token 0]: <pre> 
+
+        public static Scanner openToRead(String fileName) {
+
+  [token 0]:    public static Scanner openToRead(String fileName) { 
+
+                Scanner input = null;
+
+  [token 0]:            Scanner input = null; 
+
+                try {
+
+  [token 0]:            try { 
+
+                        input = new Scanner(new File(fileName));
+
+  [token 0]:                    input = new Scanner(new File(fileName)); 
+
+                } catch (FileNotFoundException e) {
+
+  [token 0]:            } catch (FileNotFoundException e) { 
+
+                        System.err.println("ERROR: Cannot open " + fileName + " for reading.");
+
+  [token 0]:                    System.err.println("ERROR: Cannot open " + fileName + " for reading."); 
+
+                        System.exit(-1);
+
+  [token 0]:                    System.exit(-1); 
+
+                }
+
+  [token 0]:            } 
+
+                return input;
+
+  [token 0]:            return input; 
+
+        }
+
+  [token 0]:    } 
+
+</pre>
+
+  [token 0]: </pre> 
+
+<h3>The End</h3>
+
+  [token 0]: <h3> [token 1]: The [token 2]: End [token 3]: </h3> 
+
+</body>
+
+  [token 0]: </body> 
+
+</html>
+
+  [token 0]: </html> 
