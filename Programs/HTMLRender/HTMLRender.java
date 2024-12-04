@@ -18,8 +18,8 @@
  *		<hX>, </hX> - Start/end of heading with size X = 1, 2, 3, 4, 5, 6
  *		<pre>, </pre> - Preformatted text
  *
- *	@author Aditya Dendukur
- *	@version 1.0
+ *	@author
+ *	@version
  */
 public class HTMLRender {
 	
